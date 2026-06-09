@@ -2,16 +2,20 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 import os
 
-TOKEN = os.environ.get("BOT_TOKEN")
+TOKEN = os.getenv("BOT_TOKEN")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "سلام! من اولین بات تلگرامی تو هستم 🤖🚗"
+        "سلام! من اولین بات تلگرامی تو هستم 🤖"
     )
 
-app = Application.builder().token(TOKEN).build()
+def main():
+    app = Application.builder().token(TOKEN).build()
 
-app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("start", start))
 
-print("Bot is running...")
-app.run_polling()
+    print("Bot is running...")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()
